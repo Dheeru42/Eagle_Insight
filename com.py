@@ -1,9 +1,18 @@
-from plate import * 
+# from plate import * 
 from loc1 import *
 import cv2
 from PIL import Image
 import pytesseract
 from playsound import playsound
+import os
+import django
+
+# Set up Django environment
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'eagleinsight.settings')
+django.setup()
+
+# Import Django models
+from Plate.models import Vehicle
 
 # Specify the Tesseract executable path if it's not in PATH (Windows only)
 pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
@@ -34,7 +43,7 @@ def extract_text(image_path):
 image_path = r"D:\project\ml model\eagle\eagleinsight\static\images\1.png"  # Replace with your image file
 
 while True:
-    cap()
+    # cap()
     text = extract_text(image_path)
     info = ''.join(e for e in text if e.isalnum())
     print("Number is:",info)
@@ -42,12 +51,12 @@ while True:
     ## <- testing 
     num = "RJ14CV0002"
     ## -> testing
-    if text=="":
+    if info=="":
         while time.time() < end_time:
         # Play a warning sound file
             winsound.PlaySound("warning.wav", winsound.SND_FILENAME)
         
-    if text==num:
+    if info==num:
         winsound.Beep(frequency, duration)
         while time.time() < end_time:
             beepy.beep(sound=1)

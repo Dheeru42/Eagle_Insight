@@ -1,4 +1,4 @@
-# from plate import * 
+from plate import * 
 from loc1 import *
 import cv2
 from PIL import Image
@@ -43,10 +43,10 @@ def extract_text(image_path):
 image_path = r"D:\project\ml model\eagle\eagleinsight\static\images\1.png"  # Replace with your image file
 
 while True:
-    # cap()
+    cap()
     text = extract_text(image_path)
     info = ''.join(e for e in text if e.isalnum())
-    print("Number is:",info)
+    # print("Number is:",info)
     if Vehicle.objects.filter(number_plate=info).exists():
         pass
     else:
@@ -66,7 +66,7 @@ while True:
         while time.time() < end_time:
             beepy.beep(sound=1)
         send(text)
-    break  
+      
 cv2.destroyAllWindows()
 
 
